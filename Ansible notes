@@ -25,7 +25,7 @@ Newpassword:
 ConfirmPassword:
 
 ********************
-Step 3:
+Step 3: in both controller and host
 ***********
 
 Add ec2-user in sudoers files and give all permission
@@ -51,6 +51,8 @@ Restart your sshd connection
 Repeat all the 4 steps on Host machine also and restart the sshd connection on host machine.
 
 ************************
+If in organization, SSH connecction is not allowed in project, then solution is to install ansible in all server.
+Anible require SSH connection
 
 Install Ansible :
 
@@ -89,12 +91,33 @@ Complete!
 
 version of ansible isntalled will be displayed.
 
+check ansible config file"
+========================
+
+we config everything here
+by default it is an empty file located at etc location
+etc/ansible/ansible.cfg
+playbooks are written in etc/ansible only
+modules are available in /root/.ansible
+ansible is based on python it looks for python is installed
+executable is in /usr/bin location
+
 *****************************************
 CREATE INVENTORY ON ACM and ADD Host details
 *****************************************
+update invontory with the list of OS/servers thats connected
+ansible.cfg file is located in cd /etc/ansible 
+ls
+you can see ansible.cfg, host, roles file there
+
+
 
 # vim /etc/ansible/hosts
+Individual server details can be given here for connecting to host
+If we need to connect to group of servers with the same updates it should be mentioned within the  [ ] brackets.
+ansible will connect ssh iver any of the the ip address mentioned under [webservers]
 
+If we have servers in the same network , we cn give in pattern format
 Scroll down to end and add
 
 [webservers]
@@ -104,10 +127,10 @@ paste private ip of host ==> 172.31.39.169
 
 ***********************************************
 
-OPEN SECURE SHELL CONNECTION 
+before runnng the file, servers should be connected via ssh OPEN SECURE SHELL CONNECTION 
 
 ***********************************************
-
+need to become ec2-user
 Step 1: change to ec2-user
 
 	# su - ec2-user
