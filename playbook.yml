@@ -4,7 +4,7 @@
   become_user: root
   vars:
    repo_path: https://github.com/Sonal0409/AnsibleDockerdemo.git
-   dest_path: /tmp/gitrepo
+   dest_path: /tmp
   tasks:
   - name: Install multiple packages on host server
     yum: name={{item}} state=present
